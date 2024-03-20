@@ -1,0 +1,19 @@
+[toolchain]
+
+[features]
+seeds = false
+skip-lint = false
+
+[programs.localnet]
+mesh_staking = "HcgqAqH5MwpTACy2PXA91ecu98hr1Ewt7YAf5mHeT7zY"
+
+[registry]
+url = "https://api.apr.dev"
+
+[provider]
+cluster = "Localnet"
+wallet = "/home/bilal/.config/solana/id.json"
+
+[scripts]
+test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/index.ts -r tests/hooks.ts"
+
