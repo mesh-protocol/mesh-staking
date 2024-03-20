@@ -1,6 +1,6 @@
 # Staking Program
 
-It's the program deployed on Solana which supports the staking of $MESH and $indexMESH. It allows user to stake these two SPL tokens and collect reward in SOL which will be accumulated per sec and distributed proportionally between all stakers.
+This program is deployed on Solana and supports the staking of $MESH and $indexMESH tokens. Users can stake these two SPL tokens and collect rewards in SOL, which accumulate per second and are distributed proportionally among all stakers.
 
 ## Requirements
 
