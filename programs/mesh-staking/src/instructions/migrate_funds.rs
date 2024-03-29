@@ -5,7 +5,7 @@ use crate::state::{ GlobalState, FundsController };
 
 #[derive(Accounts)]
 pub struct MigrateFunds<'info> {
-    // Only governance can execute and pay for the instruction.
+    /// Only governance can execute and pay for the instruction.
     #[account(mut)]
     pub governance: Signer<'info>,
 
@@ -13,7 +13,7 @@ pub struct MigrateFunds<'info> {
     #[account(mut)]
     pub new_version: UncheckedAccount<'info>,
 
-    // global_state PDA
+    /// Global state PDA.
     #[account(
         mut,
         seeds = [GlobalState::SEEDS],
@@ -22,7 +22,7 @@ pub struct MigrateFunds<'info> {
       )]
     pub global_state: Account<'info, GlobalState>,
 
-    // Transfer reward SOL's to new version.
+    /// Transfer reward SOLs to new version.
     #[account(
         mut,
         seeds = [FundsController::SEEDS],
@@ -32,7 +32,7 @@ pub struct MigrateFunds<'info> {
 }
 
 impl<'info> MigrateFunds<'info> {
-    // Transfer SOL's from fundsController to new version of staking program.
+    /// Transfer SOLs from fundsController to new version of staking program.
     fn transfer_sol_from_reward_vault_to_new_version(&self, _amount: u64) -> Result<()> {
         **self.funds_controller.to_account_info().try_borrow_mut_lamports()? -= _amount;
         **self.new_version.to_account_info().try_borrow_mut_lamports()? += _amount;

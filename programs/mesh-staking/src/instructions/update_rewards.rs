@@ -5,11 +5,11 @@ use crate::state::GlobalState;
 
 #[derive(Accounts)]
 pub struct UpdateRewards<'info> {
-    // Only governance can execute and pay for the instruction.
+    /// Only governance can execute and pay for the instruction.
     #[account(mut)]
     pub governance: Signer<'info>,
 
-    // Global state PDA to store updated reward and distribution_time.
+    /// Global state PDA to store updated reward and distribution_time.
     #[account(
         mut,
         seeds = [GlobalState::SEEDS],

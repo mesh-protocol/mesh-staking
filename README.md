@@ -21,8 +21,12 @@ To do local testing with `anchor test` flows.
 <!-- Disable table formatting because Prettier messing it up. -->
 <!-- prettier-ignore -->
 | Account   | Pubkey                                       |
-| ----------| --------------------------------------------|
-| **Devnet** ||
-| Program    | HcgqAqH5MwpTACy2PXA91ecu98hr1Ewt7YAf5mHeT7zY |
+| ----------| -------------------------------------------- |
+| **Mainnet** ||
+| Program    | pn2DE57M7smCc98A71DMV4jMQ7NdL7cs7azn9iPgN97 |
 | MESH       | MESHwqmXvAmKpDYSgRZkm9D5H8xYSCVixeyZoePHn4G  |
 | indexMESH  | iMESHdxK4fgZLU3FDTsT4tYatHXBbodQVParussnFMy  |
+| **Devnet** ||
+| Program | HcgqAqH5MwpTACy2PXA91ecu98hr1Ewt7YAf5mHeT7zY |
+| MESH | MESHwqmXvAmKpDYSgRZkm9D5H8xYSCVixeyZoePHn4G |
+| indexMESH | iMESHdxK4fgZLU3FDTsT4tYatHXBbodQVParussnFMy |

@@ -4,7 +4,7 @@ use super::base::*;
 
 #[derive(Accounts)]
 pub struct Claim<'info> {
-    // base instruction for calculating & distributing user pending rewards.
+    /// Base instruction for calculating & distributing user pending rewards.
     pub base: Base<'info>,
 }
 

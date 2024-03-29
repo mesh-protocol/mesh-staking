@@ -5,15 +5,15 @@ use crate::state::{ GlobalState, FundsController, DEPLOYER };
 
 #[derive(Accounts)]
 pub struct Initialize<'info> {
-    // Only deployer can invoke the init and pay rent for it.
+    /// Only deployer can invoke the init and pay rent for it.
     #[account(mut, address = DEPLOYER @ ErrorCode::InvalidDeployer)]
     pub payer: Signer<'info>,
 
-    // PDA to store global_state
+    /// PDA to store global_state
     #[account(init, seeds = [GlobalState::SEEDS], bump, payer = payer, space = GlobalState::LEN)]
     pub global_state: Account<'info, GlobalState>,
 
-    // PDA to control funds
+    /// PDA to control funds
     #[account(
         init,
         seeds = [FundsController::SEEDS],
@@ -23,6 +23,7 @@ pub struct Initialize<'info> {
     )]
     pub funds_controller: Account<'info, FundsController>,
 
+    /// The program used to create global_state & funds_controller PDA.
     pub system_program: Program<'info, System>,
 }
 

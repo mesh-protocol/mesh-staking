@@ -7,16 +7,16 @@ use crate::state::FundsController;
 
 #[derive(Accounts)]
 pub struct Unstake<'info> {
-    // base instruction for calculating & distributing user pending rewards.
+    /// Base instruction for calculating & distributing user pending rewards.
     pub base: Base<'info>,
 
-    // Mint account that will be unstake. It can only be $MESH or indexMESH.
+    /// Mint address of $MESH or $indexMESH.
     #[account(
         constraint = (mint.key() == base.global_state.mesh_mint || mint.key() ==  base.global_state.index_mesh_mint) @ ErrorCode::InvalidMint
     )]
     pub mint: Account<'info, Mint>,
 
-    // ATA of fundsConrtoller that is holding mint.
+    /// ATA of fundsConrtoller that is holding mint.
     #[account(
         mut,
         associated_token::mint = mint,
@@ -24,7 +24,7 @@ pub struct Unstake<'info> {
     )]
     pub mint_vault: Account<'info, TokenAccount>,
 
-    // ATA of user which will be receiving mint.
+    /// ATA of user which will receive mint.
     #[account(
         mut,
         associated_token::mint = mint,
@@ -32,12 +32,13 @@ pub struct Unstake<'info> {
     )]
     pub user_mint_token_account: Account<'info, TokenAccount>,
 
+    /// The program used to transfer token from vault to user ATA.
     #[account(address = token::ID)]
     pub token_program: Program<'info, Token>,
 }
 
 impl<'info> Unstake<'info> {
-    // Transfer $MESH or $indexMESH from fundsController ATA to user ATA.
+    /// Transfer $MESH or $indexMESH from fundsController ATA to user ATA.
     fn transfer_tokens_from_vault_to_user(
         &self,
         _amount: u64,

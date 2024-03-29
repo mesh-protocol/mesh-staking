@@ -5,11 +5,11 @@ use crate::state::{ GlobalState, UserInfo, SCALE_FACTOR };
 #[derive(Accounts)]
 #[instruction(_user:Pubkey)]
 pub struct PendingRewards<'info> {
-    // Global state PDA to read globally accumulated reward.
+    /// Global state PDA to read globally accumulated reward.
     #[account(seeds = [GlobalState::SEEDS], bump)]
     pub global_state: Account<'info, GlobalState>,
 
-    // User info PDA to read user accumulated reward.
+    /// User info PDA to read user accumulated reward.
     #[account(seeds = [_user.key().as_ref(), b"user_info"], bump)]
     pub user_info: Account<'info, UserInfo>,
 }

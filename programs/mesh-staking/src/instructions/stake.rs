@@ -6,16 +6,16 @@ use crate::errors::ErrorCode;
 
 #[derive(Accounts)]
 pub struct Stake<'info> {
-    // base instruction for calculating & distributing user pending rewards.
+    /// Base instruction for calculating & distributing user pending rewards.
     pub base: Base<'info>,
 
-    // Mint account that will be stake. It can only be $MESH or indexMESH.
+    /// Mint address of $MESH or $indexMESH.
     #[account(
         constraint = (mint.key() == base.global_state.mesh_mint || mint.key() == base.global_state.index_mesh_mint) @ ErrorCode::InvalidMint
     )]
     pub mint: Account<'info, Mint>,
 
-    // ATA of fundsConrtoller to hold mint.
+    /// ATA of fundsConrtoller to hold mint.
     #[account(
         mut,
         associated_token::mint = mint,
@@ -23,7 +23,7 @@ pub struct Stake<'info> {
     )]
     pub mint_vault: Account<'info, TokenAccount>,
 
-    // ATA of user that is holding mint.
+    /// ATA of user that is holding mint.
     #[account(
         mut,
         associated_token::mint = mint,
@@ -31,12 +31,13 @@ pub struct Stake<'info> {
     )]
     pub user_mint_token_account: Account<'info, TokenAccount>,
 
+    /// The program used to transfer token from user ATA to vault.
     #[account(address = token::ID)]
     pub token_program: Program<'info, Token>,
 }
 
 impl<'info> Stake<'info> {
-    // Transfer $MESH or $indexMESH from user ATA to fundsController ATA.
+    /// Transfer $MESH or $indexMESH from user ATA to fundsController ATA.
     fn transfer_tokens_from_user_to_vault(&self, _amount: u64) -> Result<()> {
         let cpi_ctx = CpiContext::new(self.token_program.to_account_info(), Transfer {
             from: self.user_mint_token_account.to_account_info(),

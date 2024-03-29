@@ -5,11 +5,11 @@ use crate::state::GlobalState;
 
 #[derive(Accounts)]
 pub struct UpdateWeightage<'info> {
-    // Only governance can execute and pay for the instruction.
+    /// Only governance can execute and pay for the instruction.
     #[account(mut)]
     pub governance: Signer<'info>,
 
-    // Global state PDA to store updated weightage.
+    /// Global state PDA to store updated weightage.
     #[account(
         mut,
         seeds = [GlobalState::SEEDS],
